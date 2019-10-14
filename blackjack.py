@@ -24,6 +24,9 @@ while 1: #esta while: 1 so para fazer loop dpois eu tiro
     
     
     #parte da aposta
+    fim = input("Você quer continuar? ")
+    if fim == "sim":
+        #gameover == True
     aposta = int(input("Faça uma aposta inicial "))
     while aposta > dinheiro_jogador:
         print("Você não tem dinheiro suficiente")
@@ -85,5 +88,5 @@ while 1: #esta while: 1 so para fazer loop dpois eu tiro
 
 
 
-#se quiser colocar multiplayer basta colar varios desses for e add novas listas para jogador 2 e 3 etc
-#oq falta: fazer o blackjack pro CPU, colocar as features(ja fiz a feature da aposta), mudar o valor de A para 1 ou 11(eu fiz mas n sei se ta certo)
+#nao sei fazer multiplayer
+#oq falta: fazer o blackjack pro CPU, colocar as features(ja fiz a feature da aposta, fim qnd fim e multiplos baralhos), mudar o valor de A para 1 ou 11(eu fiz mas n sei se ta certo)
