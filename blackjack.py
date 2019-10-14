@@ -85,6 +85,22 @@ while 1: #esta while: 1 so para fazer loop dpois eu tiro
         cartas = random.choice(baralho)
         cpu.append(cartas)
         
+        def valor_dealer(dealer):       # sorteia as cartas do dealer para comparar
+            total = 0
+            valor = []
+            for i in dealer:
+                valor.append(i[1])  
+            total = sum(valor)
+            y = True
+            while y == True:
+                if total > 21 and 11 in valor:
+                    valor.remove(11)
+                    valor.append(1)
+                    total = sum(valor)
+                else:
+                    y = False
+                return total
+        
  
 
 
