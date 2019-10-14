@@ -25,9 +25,10 @@ while 1: #esta while: 1 so para fazer loop dpois eu tiro
     
     #parte da aposta
     fim = input("Você quer continuar? ")
-    if fim == "sim":
+    if fim == "nao":
         #gameover == True
-    aposta = int(input("Faça uma aposta inicial "))
+        break
+        aposta = int(input("Faça uma aposta inicial "))
     while aposta > dinheiro_jogador:
         print("Você não tem dinheiro suficiente")
         aposta = int(input("Faça uma aposta inicial "))
@@ -83,6 +84,7 @@ while 1: #esta while: 1 so para fazer loop dpois eu tiro
     for i in range(2):   #selecionando as cartas do CPU
         cartas = random.choice(baralho)
         cpu.append(cartas)
+        
  
 
 
