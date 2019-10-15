@@ -28,7 +28,7 @@ while 1: #esta while: 1 so para fazer loop dpois eu tiro
     if fim == "nao":
         #gameover == True
         break
-        aposta = int(input("Faça uma aposta inicial "))
+    aposta = int(input("Faça uma aposta inicial "))
     while aposta > dinheiro_jogador:
         print("Você não tem dinheiro suficiente")
         aposta = int(input("Faça uma aposta inicial "))
