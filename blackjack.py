@@ -29,6 +29,7 @@ while 1: #esta while: 1 so para fazer loop dpois eu tiro
     for i in range(2):   #selecionando as cartas do CPU
         cartas = random.choice(baralho)
         cpu.append(cartas)
+    print("----------NOVO JOGO----------")
     print("A carta do CPU é: ",cpu[1])
     for x in valor.keys():
         if x in cpu:
@@ -85,11 +86,11 @@ while 1: #esta while: 1 so para fazer loop dpois eu tiro
             
             
             #Jogador ganha do CPU por maior soma mas n chega em 21
-    if soma_jogador > soma_cpu and soma_jogador < 21:
+    if soma_jogador > soma_cpu and soma_jogador <= 21:
         print("Sua soma deu", soma_jogador)
         print("A soma do CPU deu", soma_cpu)
         print("Você ganhou do CPU")
-        dinheiro_jogador += aposta
+        dinheiro_jogador += aposta * 1.5
         print("Você tem $",dinheiro_jogador)
         jogador = []
         cpu = []
@@ -109,7 +110,7 @@ while 1: #esta while: 1 so para fazer loop dpois eu tiro
         
          #CPU ganha do jogador
         
-    if soma_jogador < soma_cpu:
+    if soma_jogador < soma_cpu and soma_cpu <= 21:
         print("Sua soma deu", soma_jogador)
         print("A soma do CPU deu", soma_cpu)
         jogador = []
@@ -117,6 +118,19 @@ while 1: #esta while: 1 so para fazer loop dpois eu tiro
         print("Você perdeu")
         dinheiro_jogador -= aposta
         print("Você tem $",dinheiro_jogador)
+        cpu = []
+        
+        
+        
+       #Se a CPU faz blackjack, ganha do jogador: 
+        
+    if soma_cpu == 21 and soma_jogador != 21:
+        print("Sua soma deu", soma_jogador)
+        print("A soma do CPU deu", soma_cpu)
+        print("Você perdeu")
+        dinheiro_jogador -= aposta 
+        print("Você esta com $",dinheiro_jogador)
+        jogador = []
         cpu = []
         
         
