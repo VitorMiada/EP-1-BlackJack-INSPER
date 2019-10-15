@@ -13,12 +13,39 @@ valor = {"2":2, "3":3, "4":4, "5":5, "6":6, "7":7, "8":8,
 
 random.shuffle(baralho)      #embaralhando o baralho
 
-jogador = []
-soma_jogador = 0
-cpu = []
-soma_cpu = 0
-#gamover == False
+
+
+#gameover == False
 while 1: #esta while: 1 so para fazer loop dpois eu tiro
+    soma_jogador = 0
+    soma_cpu = 0
+    jogador = []
+    cpu = []  
+    #PARTE DO CPU
+    
+    
+    #parte de escolher as cartas
+        
+    for i in range(2):   #selecionando as cartas do CPU
+        cartas = random.choice(baralho)
+        cpu.append(cartas)
+    print("A carta do CPU é: ",cpu[1])
+    for x in valor.keys():
+        if x in cpu:
+            soma_cpu += valor[x]
+    while soma_cpu < 18:
+        cartas = random.choice(baralho)
+        cpu.append(cartas)
+        soma_cpu += valor[cartas]
+        
+
+                
+
+        
+    
+
+        
+ 
     
     #PARTE DO JOGADOR
     
@@ -53,22 +80,58 @@ while 1: #esta while: 1 so para fazer loop dpois eu tiro
             soma_jogador += valor[j]   #valor[j], é a carta que ele tem na lista jogador só que com valor numerico
             if 21 - soma_jogador == 11 and "A" in jogador:
                 soma_jogador == 21 #O As vira 11 quando a somatoria do A sendo 11 + o resto = 21, caso contrario ele valerá 1. Certo?
-            
         #parte de ver se o jogador perdeu/venceu    
             
-    if soma_jogador > 21:
+            
+            
+            #Jogador ganha do CPU por maior soma mas n chega em 21
+    if soma_jogador > soma_cpu and soma_jogador < 21:
+        print("Sua soma deu", soma_jogador)
+        print("A soma do CPU deu", soma_cpu)
+        print("Você ganhou do CPU")
+        dinheiro_jogador += aposta
+        print("Você tem $",dinheiro_jogador)
+        jogador = []
+        cpu = []
+        
+        
+        #jogador tira 21
+        
+        
+    if soma_jogador == 21 and soma_cpu != 21:
+        print("Sua soma deu", soma_jogador)
+        print("A soma do CPU deu", soma_cpu)
+        print("PARABENS, você GANHOU!!")
+        dinheiro_jogador += aposta * 1.5
+        print("Você esta com $",dinheiro_jogador)
+        jogador = []
+        cpu = []
+        
+         #CPU ganha do jogador
+        
+    if soma_jogador < soma_cpu:
+        print("Sua soma deu", soma_jogador)
+        print("A soma do CPU deu", soma_cpu)
+        jogador = []
+        soma_jogador = 0
         print("Você perdeu")
         dinheiro_jogador -= aposta
         print("Você tem $",dinheiro_jogador)
+        cpu = []
+        
+        
+        #jogador tira mais que 21
+        
+    if soma_jogador > 21:
+        
+        print("Sua soma deu", soma_jogador)
+        print("A soma do CPU deu", soma_cpu)
         jogador = []
-        
-    if soma_jogador == 21:
-        print("PARABENS, você GANHOU!!")
-        dinheiro_jogador += aposta * 1.5
-        break #gambiarra para parar o jogo
-        
-    #if soma_jogador < 21:
-        #lER AS EXPLICAÇÕES DO EP PQ EU N ENTENDI
+        soma_jogador = 0
+        print("Você perdeu")
+        dinheiro_jogador -= aposta
+        print("Você tem $",dinheiro_jogador)
+        cpu = []
         
     if dinheiro_jogador == 0:
         print("Você não tem mais dinheiro para apostar :)")
@@ -76,35 +139,7 @@ while 1: #esta while: 1 so para fazer loop dpois eu tiro
 
     
     
-    #PARTE DO CPU
-    
-    
-    #parte de escolher as cartas
-        
-    for i in range(2):   #selecionando as cartas do CPU
-        cartas = random.choice(baralho)
-        cpu.append(cartas)
-        
-        def valor_dealer(dealer):       # sorteia as cartas do dealer para comparar
-            total = 0
-            valor = []
-            for i in dealer:
-                valor.append(i[1])  
-            total = sum(valor)
-            y = True
-            while y == True:
-                if total > 21 and 11 in valor:
-                    valor.remove(11)
-                    valor.append(1)
-                    total = sum(valor)
-                else:
-                    y = False
-                return total
-        
- 
 
 
 
-
-#nao sei fazer multiplayer
 #oq falta: fazer o blackjack pro CPU, colocar as features(ja fiz a feature da aposta, fim qnd fim e multiplos baralhos), mudar o valor de A para 1 ou 11(eu fiz mas n sei se ta certo)
