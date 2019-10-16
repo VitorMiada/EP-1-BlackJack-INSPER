@@ -4,19 +4,42 @@ dinheiro_jogador = 10000
 
 n_baralhos = int(input("Com quantos baralhos você quer jogar? "))*4
 
-baralhos = ["2","3","4","5","6","7","8","9","J","Q","K","A"]
+baralhos = ["2 ouros","2 paus","2 copas","2 espadas",
+            "3 ouros","3 paus","3 copas","3 espadas",
+           "4 ouros","4 paus","4 copas","4 espadas",
+           "5 ouros","5 paus","5 copas","5 espadas",
+            "6 ouros","6 paus","6 copas","6 espadas",
+            "7 ouros","7 paus","7 copas","7 espadas",
+            "8 ouros","8 paus","8 copas","8 espadas",
+            "9 ouros","9 paus","9 copas","9 espadas",
+            "10 ouros","10 paus","10 copas","10 espadas",
+            "J ouros","J paus","J copas","J espadas",
+            "Q ouros","Q paus","Q copas","Q espadas",
+            "K ouros","K paus","K copas","K espadas",
+            "A ouros","A paus","A copas","A espadas"]
+
+
+
+
+
 
 baralho = baralhos * n_baralhos   #juntando todos os baralhos em uma lista
 
-valor = {"2":2, "3":3, "4":4, "5":5, "6":6, "7":7, "8":8,
-         "9":9, "J":10, "Q": 10, "K":10, "A":1}
+
+valor = {"2 ouros": 2,"2 paus": 2,"2 copas": 2,"2 espadas": 2,"3 ouros": 3,"3 paus": 3,"3 copas": 3,"3 espadas": 3,
+        "4 ouros": 4,"4 paus": 4,"4 copas": 4,"4 espadas": 4,"5 ouros": 5,"5 paus": 5,"5 copas": 5,"5 espadas": 5,
+        "6 ouros": 6,"6 paus": 6,"6 copas": 6,"6 espadas": 6,"7 ouros": 7,"7 paus": 7,"7 copas": 7,"7 espadas": 7,
+        "8 ouros": 8,"8 paus": 8,"8 copas": 8,"8 espadas": 8,"9 ouros": 9,"9 paus": 9,"9 copas": 9,"9 espadas": 9,
+        "10 ouros": 10,"10 paus": 10,"10 copas": 10,"10 espadas": 10,"J ouros": 10,"J paus": 10,"J copas": 10,"J espadas": 10,
+        "Q ouros": 10,"Q paus": 10,"Q copas": 10,"Q espadas": 10,"K ouros": 10,"K paus": 10,"K copas": 10,"K espadas": 10,
+        "A ouros": 11,"A paus": 11,"A copas": 11,"A espadas": 11}
 
 random.shuffle(baralho)      #embaralhando o baralho
 
 
 
-#gameover == False
-while 1: #esta while: 1 so para fazer loop dpois eu tiro
+gameover = False
+while gameover == False: #esta while: 1 so para fazer loop dpois eu tiro
     soma_jogador = 0
     soma_cpu = 0
     jogador = []
@@ -38,6 +61,7 @@ while 1: #esta while: 1 so para fazer loop dpois eu tiro
         cartas = random.choice(baralho)
         cpu.append(cartas)
         soma_cpu += valor[cartas]
+    print(soma_cpu)
         
 
                 
@@ -54,8 +78,8 @@ while 1: #esta while: 1 so para fazer loop dpois eu tiro
     #parte da aposta
     fim = input("Você quer continuar? ")
     if fim == "nao":
-        #gameover == True
         break
+        
     aposta = int(input("Faça uma aposta inicial "))
     while aposta > dinheiro_jogador:
         print("Você não tem dinheiro suficiente")
@@ -70,8 +94,11 @@ while 1: #esta while: 1 so para fazer loop dpois eu tiro
     mais = input("Mais cartas, digite mais, se não quiser, pressione Enter ")
     while mais == "mais":
         cartas = random.choice(baralho)
-        jogador.append(cartas)
-        print(jogador)
+        if cartas not in jogador:
+            jogador.append(cartas)
+        
+        
+            print(jogador)
         mais = input("Mais cartas, digite mais, se não quiser, pressione Enter ")
         
        #parte de somar os valores de cada carta 
@@ -79,64 +106,77 @@ while 1: #esta while: 1 so para fazer loop dpois eu tiro
     for j in valor.keys():
         if j in jogador:
             soma_jogador += valor[j]   #valor[j], é a carta que ele tem na lista jogador só que com valor numerico
-            if 21 - soma_jogador == 11 and "A" in jogador:
-                soma_jogador == 21 #O As vira 11 quando a somatoria do A sendo 11 + o resto = 21, caso contrario ele valerá 1. Certo?
-        #parte de ver se o jogador perdeu/venceu    
+            if "A ouros" in jogador or "A paus" in jogador or "A copas" in jogador or "A espadas" in jogador:                
+                if soma_jogador >= 22:
+                    q = 0
+                    while q < len(jogador):
+                        if jogador[q] == "A paus" or jogador[q] =="A copas" or jogador[q] == "A espadas" or jogador[q] == "A ouros":
+                            soma_jogador -= 10
+                        q +=1
+                    
             
             
-            
-            #Jogador ganha do CPU por maior soma mas n chega em 21
+            #Jogador ganha do CPU 
     if soma_jogador > soma_cpu and soma_jogador <= 21:
         print("Sua soma deu", soma_jogador)
         print("A soma do CPU deu", soma_cpu)
         print("Você ganhou do CPU")
         dinheiro_jogador += aposta * 1.5
         print("Você tem $",dinheiro_jogador)
-        jogador = []
-        cpu = []
+        
+        # Jogador ganha do CPU
+        
+    elif soma_cpu > 21 and soma_jogador <= 21:
+        print("Sua soma deu", soma_jogador)
+        print("A soma do CPU deu", soma_cpu)
+        print("Você ganhou do CPU")
+        dinheiro_jogador += aposta * 1.5
+        print("Você tem $",dinheiro_jogador)
+
+
         
         
-        #jogador tira 21
+        #Jogador tirar 21
         
         
-    if soma_jogador == 21 and soma_cpu != 21:
+    elif soma_jogador == 21 and soma_cpu != 21:
         print("Sua soma deu", soma_jogador)
         print("A soma do CPU deu", soma_cpu)
         print("PARABENS, você GANHOU!!")
         dinheiro_jogador += aposta * 1.5
         print("Você esta com $",dinheiro_jogador)
-        jogador = []
-        cpu = []
+        
+        
+        
+        
+        
+        
         
          #CPU ganha do jogador
         
-    if soma_jogador < soma_cpu and soma_cpu <= 21:
+    elif soma_jogador < soma_cpu and soma_cpu <= 21:
         print("Sua soma deu", soma_jogador)
         print("A soma do CPU deu", soma_cpu)
-        jogador = []
         soma_jogador = 0
         print("Você perdeu")
         dinheiro_jogador -= aposta
         print("Você tem $",dinheiro_jogador)
-        cpu = []
-        
+
         
         
        #Se a CPU faz blackjack, ganha do jogador: 
         
-    if soma_cpu == 21 and soma_jogador != 21:
+    elif soma_cpu == 21 and soma_jogador != 21:
         print("Sua soma deu", soma_jogador)
         print("A soma do CPU deu", soma_cpu)
         print("Você perdeu")
         dinheiro_jogador -= aposta 
         print("Você esta com $",dinheiro_jogador)
-        jogador = []
-        cpu = []
         
         
         #jogador tira mais que 21
         
-    if soma_jogador > 21:
+    elif soma_jogador > 21 and soma_cpu <= 21:
         
         print("Sua soma deu", soma_jogador)
         print("A soma do CPU deu", soma_cpu)
@@ -145,15 +185,34 @@ while 1: #esta while: 1 so para fazer loop dpois eu tiro
         print("Você perdeu")
         dinheiro_jogador -= aposta
         print("Você tem $",dinheiro_jogador)
-        cpu = []
+    
+    elif soma_jogador > 21 and soma_cpu > 21:
+        print("Sua soma deu", soma_jogador)
+        print("A soma do CPU deu", soma_cpu)
+        jogador = []
+        soma_jogador = 0
+        print("Ninguém venceu, seu dinheiro retornou")
+        dinheiro_jogador += 0
+        print("Você tem $",dinheiro_jogador)
+        
+        
+        
+    elif soma_jogador == soma_cpu:
+        print("Sua soma deu", soma_jogador)
+        print("A soma do CPU deu", soma_cpu)
+        jogador = []
+        soma_jogador = 0
+        print("Ninguém venceu, seu dinheiro retornou")
+        dinheiro_jogador += 0
+        print("Você tem $",dinheiro_jogador)
+        
+        
         
     if dinheiro_jogador == 0:
         print("Você não tem mais dinheiro para apostar :)")
-        break #gambiarra para parar o jogo
+        break
 
     
     
 
-
-
-#oq falta: fazer o blackjack pro CPU, colocar as features(ja fiz a feature da aposta, fim qnd fim e multiplos baralhos), mudar o valor de A para 1 ou 11(eu fiz mas n sei se ta certo)
+#falta :multijogador
