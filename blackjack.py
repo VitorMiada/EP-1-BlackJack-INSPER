@@ -61,7 +61,6 @@ while gameover == False: #esta while: 1 so para fazer loop dpois eu tiro
         cartas = random.choice(baralho)
         cpu.append(cartas)
         soma_cpu += valor[cartas]
-    print(soma_cpu)
         
 
                 
