@@ -39,17 +39,21 @@ random.shuffle(baralho)      #embaralhando o baralho
 
 
 gameover = False
-while gameover == False: #esta while: 1 so para fazer loop dpois eu tiro
+while gameover == False: 
     soma_jogador = 0
     soma_cpu = 0
     jogador = []
     cpu = []  
-    #PARTE DO CPU
     
     
-    #parte de escolher as cartas
+    
+    
+    #----------PARTE DO CPU----------
+    
+    
+    ##parte de escolher as cartas
         
-    for i in range(2):   #selecionando as cartas do CPU
+    for i in range(2):                  #selecionando as cartas do CPU
         cartas = random.choice(baralho)
         cpu.append(cartas)
     print("----------NOVO JOGO----------")
@@ -66,15 +70,11 @@ while gameover == False: #esta while: 1 so para fazer loop dpois eu tiro
                 
 
         
-    
-
-        
- 
-    
-    #PARTE DO JOGADOR
+    ##----------PARTE DO JOGADOR----------
     
     
-    #parte da aposta
+    ###parte da aposta
+    
     fim = input("Você quer continuar? ")
     if fim == "nao":
         break
@@ -84,9 +84,9 @@ while gameover == False: #esta while: 1 so para fazer loop dpois eu tiro
         print("Você não tem dinheiro suficiente")
         aposta = int(input("Faça uma aposta inicial "))
         
-     #parte de escolher as cartas   
         
-    for i in range(2):    #selecionando as cartas do jogador
+        
+    for i in range(2):          #selecionando as cartas do jogador
         cartas = random.choice(baralho)
         jogador.append(cartas)
     print("Suas cartas são ",jogador)
@@ -100,7 +100,7 @@ while gameover == False: #esta while: 1 so para fazer loop dpois eu tiro
             print(jogador)
         mais = input("Mais cartas, digite mais, se não quiser, pressione Enter ")
         
-       #parte de somar os valores de cada carta 
+       ###parte de somar os valores de cada carta 
         
     for j in valor.keys():
         if j in jogador:
@@ -115,7 +115,8 @@ while gameover == False: #esta while: 1 so para fazer loop dpois eu tiro
                     
             
             
-            #Jogador ganha do CPU 
+        ## Jogador ganha do CPU
+        
     if soma_jogador > soma_cpu and soma_jogador <= 21:
         print("Sua soma deu", soma_jogador)
         print("A soma do CPU deu", soma_cpu)
@@ -123,7 +124,7 @@ while gameover == False: #esta while: 1 so para fazer loop dpois eu tiro
         dinheiro_jogador += aposta * 1.5
         print("Você tem $",dinheiro_jogador)
         
-        # Jogador ganha do CPU
+        ## Jogador ganha do CPU
         
     elif soma_cpu > 21 and soma_jogador <= 21:
         print("Sua soma deu", soma_jogador)
@@ -132,10 +133,7 @@ while gameover == False: #esta while: 1 so para fazer loop dpois eu tiro
         dinheiro_jogador += aposta * 1.5
         print("Você tem $",dinheiro_jogador)
 
-
-        
-        
-        #Jogador tirar 21
+        ## Jogador tirar 21
         
         
     elif soma_jogador == 21 and soma_cpu != 21:
@@ -145,13 +143,7 @@ while gameover == False: #esta while: 1 so para fazer loop dpois eu tiro
         dinheiro_jogador += aposta * 1.5
         print("Você esta com $",dinheiro_jogador)
         
-        
-        
-        
-        
-        
-        
-         #CPU ganha do jogador
+         ## CPU ganha do jogador
         
     elif soma_jogador < soma_cpu and soma_cpu <= 21:
         print("Sua soma deu", soma_jogador)
@@ -161,9 +153,7 @@ while gameover == False: #esta while: 1 so para fazer loop dpois eu tiro
         dinheiro_jogador -= aposta
         print("Você tem $",dinheiro_jogador)
 
-        
-        
-       #Se a CPU faz blackjack, ganha do jogador: 
+        ## Se a CPU faz blackjack, ganha do jogador: 
         
     elif soma_cpu == 21 and soma_jogador != 21:
         print("Sua soma deu", soma_jogador)
@@ -172,8 +162,7 @@ while gameover == False: #esta while: 1 so para fazer loop dpois eu tiro
         dinheiro_jogador -= aposta 
         print("Você esta com $",dinheiro_jogador)
         
-        
-        #jogador tira mais que 21
+        ## Jogador tira mais que 21
         
     elif soma_jogador > 21 and soma_cpu <= 21:
         
@@ -184,6 +173,8 @@ while gameover == False: #esta while: 1 so para fazer loop dpois eu tiro
         print("Você perdeu")
         dinheiro_jogador -= aposta
         print("Você tem $",dinheiro_jogador)
+        
+        ## Jogador e CPU
     
     elif soma_jogador > 21 and soma_cpu > 21:
         print("Sua soma deu", soma_jogador)
@@ -194,7 +185,7 @@ while gameover == False: #esta while: 1 so para fazer loop dpois eu tiro
         dinheiro_jogador += 0
         print("Você tem $",dinheiro_jogador)
         
-        
+        ## Jogador e CPU empatam
         
     elif soma_jogador == soma_cpu:
         print("Sua soma deu", soma_jogador)
@@ -205,7 +196,7 @@ while gameover == False: #esta while: 1 so para fazer loop dpois eu tiro
         dinheiro_jogador += 0
         print("Você tem $",dinheiro_jogador)
         
-        
+        ## Se acabar o dinheiro
         
     if dinheiro_jogador == 0:
         print("Você não tem mais dinheiro para apostar :)")
@@ -214,4 +205,3 @@ while gameover == False: #esta while: 1 so para fazer loop dpois eu tiro
     
     
 
-#falta :multijogador
